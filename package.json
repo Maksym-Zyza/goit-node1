@@ -1,0 +1,27 @@
+{
+  "name": "goit-node1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon ./index.js",
+    "start": "npm run build && node ./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maksym-Zyza/goit-node1.git"
+  },
+  "keywords": [],
+  "author": "Maksym Zyza <mmziza88@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maksym-Zyza/goit-node1/issues"
+  },
+  "homepage": "https://github.com/Maksym-Zyza/goit-node1#readme",
+  "dependencies": {
+    "commander": "^7.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
