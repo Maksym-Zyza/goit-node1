@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const argv = process.argv;
+const shortid = require("shortid");
 
+// const contactsPath = path.join(__dirname, "db/contacts.json");
 const contactsPath = path.resolve("db/contacts.json");
 
 // === Чтение файла
@@ -30,11 +31,13 @@ function getContactById(contactId) {
     }
     const contacts = JSON.parse(data.toString());
 
-    contacts.find((contact) => {
-      if (contact.id === contactId) {
-        console.table(contact);
-      }
-    });
+    const foundContact = contacts.find(({ id }) => id === contactId);
+
+    if (foundContact) {
+      console.table([foundContact]);
+    } else {
+      process.exit(1);
+    }
   });
 }
 
@@ -56,25 +59,32 @@ function removeContact(contactId) {
         }
       });
     }
-    console.log("Success! Contact was deleted.");
+    console.log(">>Contact was deleted.");
     listContacts();
   });
 }
 
 // === Записать контакт
 function addContact(name, email, phone) {
-  // ...твой код
-  fs.writeFile(contactsPath, "utf8", (err, data) => {
+  fs.readFile(contactsPath, "utf8", (err, data) => {
     if (err) {
       console.log(err);
       return;
     }
-    console
-      .log
-      //  const [_, __, name, age] = argv
-      //  data.push({ name, age })
-      // fs.writeFile('data.json', JSON.stringify(content, null, 2))
-      ();
+
+    const contacts = JSON.parse(data.toString());
+    const id = shortid.generate();
+
+    if ((name, email, phone)) {
+      contacts.push({ id, name, email, phone });
+      fs.writeFile(contactsPath, JSON.stringify(contacts), (err) => {
+        if (err) {
+          console.log(err.message);
+        }
+        console.log(">>Contact was added.");
+        listContacts();
+      });
+    }
   });
 }
 
