@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const shortid = require("shortid");
 
-// const contactsPath = path.join(__dirname, "db/contacts.json");
 const contactsPath = path.resolve("db/contacts.json");
 
 // === Чтение файла
